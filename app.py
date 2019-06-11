@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from rough_form import Ui_Form as NameForm
-from evaluate_team import Ui_Form as EvaluateForm
+from newWindow import Ui_Form as NameForm
+from evaluateWindow import Ui_Form as EvaluateForm
 from openWindow import Ui_Form as OpenForm
 import sqlite3
 import sys
@@ -461,15 +461,15 @@ class Ui_MainWindow(object):
         player_list = []
         for index in range(self.teamList.count()):
             player_list.append(self.teamList.item(index).text())
-        conn = sqlite3.connect('mycricket.db')
-        cur = conn.cursor()
+        conn_11 = sqlite3.connect('mycricket.db')
+        cur_11 = conn_11.cursor()
         for player in player_list:
-            cur.execute("select value from stats where player='"+player+"';")
-            data = cur.fetchone()
-            cur.execute("insert into team(name,players,value) values('"+team_name+"','"+
+            cur_11.execute("select value from stats where player='"+player+"';")
+            data = cur_11.fetchone()
+            cur_11.execute("insert into team(name,players,value) values('"+team_name+"','"+
                 player+"',"+str(data[0])+");")
-        conn.commit()
-        conn.close()
+        conn_11.commit()
+        conn_11.close()
         msg_box=QtWidgets.QMessageBox()
         msg_box.setText("Saved!!!")
         msg_box.exec_()
